@@ -5,4 +5,4 @@ grammar_cjkRuby: true
 ---
 
 
-## 含义
+## Promise 的含义
