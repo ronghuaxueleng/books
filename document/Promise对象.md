@@ -25,4 +25,16 @@ grammar_cjkRuby: true
 
 
 ## 基本用法
-> ES6规定，`Promise`对象是一个构造函数，用来生成`Promise`实例
+> ES6规定，`Promise`对象是一个构造函数，用来生成`Promise`实例，
+下面代码创造了一个`Promise`实例：
+```javascript
+var promise = new Promise(function(resolve, reject) {
+  // ... 一些操作
+
+  if (/* 异步操作成功 */){
+    resolve(value);
+  } else {
+    reject(error);
+  }
+});
+```
