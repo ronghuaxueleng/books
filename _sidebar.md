@@ -1,4 +1,5 @@
 - 首页
   - 笔记
     - [VUE2编译环境搭建](./note/VUE2编译环境搭建.md) 
-  - [文档](./document)
+  - 文档
+    - [Promise对象](./document/Promise对象.md)
