@@ -39,8 +39,8 @@ var promise = new Promise(function(resolve, reject) {
 });
 ```
 
-`Promise`构造函数接受一个函数作为参数，该函数的两个参数是两个函数，分别是`resolve`和`reject`。
-`resolve`函数的作用是，将`Promise`对象的状态从“未完成”变为“成功”（即从`Pending`变为`Resolved`），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；`reject`函数的作用是，将`Promise`对象的状态从“未完成”变为“失败”（即从`Pending`变为`Rejected`）
+*`Promise`构造函数接受一个函数作为参数，该函数的两个参数是两个函数，分别是`resolve`和`reject`。
+`resolve`函数的作用是，将`Promise`对象的状态从“未完成”变为“成功”（即从`Pending`变为`Resolved`），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；`reject`函数的作用是，将`Promise`对象的状态从“未完成”变为“失败”（即从`Pending`变为`Rejected`）*
 
 `Promise`实例生成以后，可以用`then`方法分别指定`Resolved`状态和`Reject`状态的回调函数。
 
@@ -49,5 +49,39 @@ promise.then(function(value) {
   // 成功
 }, function(error) {
   // 失败
+});
+```
+*`then`方法可以接受两个回调函数作为参数。第一个回调函数是`Promise`对象的状态变为`Resolved`时调用，第二个回调函数是`Promise`对象的状态变为`Rejected`时调用。其中，第二个函数是可选的，不一定要提供。这两个函数都接受`Promise`对象传出的值作为参数。*
+
+下面是一个用Promise对象实现的 Ajax 操作的例子。
+```javascript
+var getJSON = function(url) {
+  var promise = new Promise(function(resolve, reject){
+    var client = new XMLHttpRequest();
+    client.open("GET", url);
+    client.onreadystatechange = handler;
+    client.responseType = "json";
+    client.setRequestHeader("Accept", "application/json");
+    client.send();
+
+    function handler() {
+      if (this.readyState !== 4) {
+        return;
+      }
+      if (this.status === 200) {
+        resolve(this.response);
+      } else {
+        reject(new Error(this.statusText));
+      }
+    };
+  });
+
+  return promise;
+};
+
+getJSON("/posts.json").then(function(json) {
+  console.log('Contents: ' + json);
+}, function(error) {
+  console.error('出错了', error);
 });
 ```
