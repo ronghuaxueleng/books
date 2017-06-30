@@ -39,4 +39,5 @@ var promise = new Promise(function(resolve, reject) {
 });
 ```
 
-`Promise`构造函数接受一个函数作为参数，该函数的两个参数分别是`resolve`和`reject`。
+`Promise`构造函数接受一个函数作为参数，该函数的两个参数是两个函数，分别是`resolve`和`reject`。
+`resolve`函数的作用是，将`Promise`对象的状态从“未完成”变为“成功”（即从`Pending`变为`Resolved`），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；`reject`函数的作用是，将`Promise`对象的状态从“未完成”变为“失败”（即从`Pending`变为`Rejected`）
