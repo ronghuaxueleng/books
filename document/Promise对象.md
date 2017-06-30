@@ -38,3 +38,5 @@ var promise = new Promise(function(resolve, reject) {
   }
 });
 ```
+
+`Promise`构造函数接受一个函数作为参数，该函数的两个参数分别是`resolve`和`reject`。
